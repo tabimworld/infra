@@ -8,10 +8,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - admin.tabimworld.com
+        - cms.tabimworld.com
       secretName: backend-tls
   rules:
-    - host: admin.tabimworld.com
+    - host: cms.tabimworld.com
       http:
         paths:
           - path: /
