@@ -8,10 +8,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - admin-staging.tabimworld.com
+        - cms-staging.tabimworld.com
       secretName: backend-tls
   rules:
-    - host: admin-staging.tabimworld.com
+    - host: cms-staging.tabimworld.com
       http:
         paths:
           - path: /
