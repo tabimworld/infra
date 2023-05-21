@@ -5,3 +5,4 @@ resources:
   - env.sealed-secret.yaml
   - service.yaml
   - ingress.yaml
+  - depl.yaml

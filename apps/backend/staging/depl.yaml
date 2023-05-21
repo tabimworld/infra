@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-depl
+  namespace: tabimworld-staging
+  annotations:
+    reloader.stakater.com/auto: 'true'
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend-depl
+  template:
+    metadata:
+      labels:
+        app: backend-depl
+    spec:
+      containers:
+        - name: headless
+          image: ghcr.io/tabimworld/backend:main # {"$imagepolicy": "tabimworld-staging:tabimworld-backend"}
+          envFrom:
+            - secretRef:
+                name: backend-env
+            - configMapRef:
+                name: backend-env
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImageRepository
+metadata:
+  name: tabimworld-backend
+  namespace: tabimworld-staging
+spec:
+  image: ghcr.io/tabimworld/backend
+  interval: 1m0s
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImagePolicy
+metadata:
+  name: tabimworld-backend
+  namespace: tabimworld-staging
+spec:
+  imageRepositoryRef:
+    name: tabimworld-backend
+  filterTags:
+    pattern: '^main-[a-fA-F0-9]+-(?P<ts>.*)'
+    extract: '$ts'
+  policy:
+    numerical:
+      order: asc
