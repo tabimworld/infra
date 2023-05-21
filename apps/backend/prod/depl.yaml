@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: headless
-          image: ghcr.io/tabimworld/backend:main-0dd0d4e-1684681817 # {"$imagepolicy": "tabimworld-staging:tabimworld-backend"}
+          image: ghcr.io/tabimworld/backend:main-345fd4a-1684681918 # {"$imagepolicy": "tabimworld-staging:tabimworld-backend"}
           envFrom:
             - secretRef:
                 name: backend-env
